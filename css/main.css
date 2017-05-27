@@ -1,0 +1,61 @@
+body{
+    padding:0 ;
+    margin: 0 ;
+}
+
+containerAll{
+    flex:1;
+    flex-direction: column;
+    padding: inherit;
+    margin: inherit;
+}
+
+nav {
+    background-color: #424242;
+    padding: 10px;
+    flex:1;
+}
+
+nav div {
+    flex:1;
+    width:50%;
+    margin: 0 auto;
+    margin-left: 0;
+    align-content: center;
+    justify-content: center
+}
+
+nav div p {
+    padding-left: 10%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    color: #EEEEEE
+}
+
+table {
+    font-family: 'Roboto', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+tr:nth-child(odd){
+    background-color: #EEEEEE;
+}
+
+.containerBody{
+    flex:1;
+    flex-flow: column wrap;
+    margin: 5%;
+    border-radius: 4px;
+    background-color: #E3F2FD;
+    padding: 5%;
+}
