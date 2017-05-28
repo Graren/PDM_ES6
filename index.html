@@ -15,49 +15,87 @@
             </div>
         </nav>
         <div class='containerBody'>
-            <div>
-
+            <div class="add">
+                <div>
+                    <p>ID</p>
+                    <input type="number" name="id" id="idInput" value='0'>
+                </div>
+                <div>
+                    <p>Name</p>
+                    <input type="text" name="name" id="nameInput">
+                </div>
+                <div>
+                    <p>Provider</p>
+                    <input type="text" name="provider" id="providerInput">
+                </div>
+                <div>
+                    <p>Price</p>
+                    <input type="number" name="price" min="0.00" step="0.01" value='0.00' id="priceInput">
+                </div>
+                <div>
+                    <p>Date</p>
+                    <input type="date" name="date" id="dateInput">
+                </div>
+                <div>
+                    <button type="button" id="addButton">Add</button>
+                </div>
             </div>
-            <div>
-                <table>
+            <div class="tableContainer">
+                <table id="table" >
                     <tr>
-                        <th>Company</th>
-                        <th>Contact</th>
-                        <th>Country</th>
+                        <th>ID <input type="checkbox" id="idCheck"></th>
+                        <th>Name <input type="checkbox" id="nameCheck"></th>
+                        <th>Provider <input type="checkbox" id="providerCheck"></th>
+                        <th>Price <input type="checkbox" id="priceCheck"></th>
+                        <th>Date <input type="checkbox" id="dateCheck"></th>
                     </tr>
                     <tr>
                         <td>Alfreds Futterkiste</td>
                         <td>Maria Anders</td>
                         <td>Germany</td>
+                        <td>0.00</td>
+                        <td>01-01-2017</td>
                     </tr>
                     <tr>
                         <td>Centro comercial Moctezuma</td>
                         <td>Francisco Chang</td>
                         <td>Mexico</td>
+                        <td>0.00</td>
+                        <td>01-01-2017</td>
                     </tr>
                     <tr>
                         <td>Ernst Handel</td>
                         <td>Roland Mendel</td>
                         <td>Austria</td>
+                        <td>0.00</td>
+                        <td>01-01-2017</td>
                     </tr>
                     <tr>
                         <td>Island Trading</td>
                         <td>Helen Bennett</td>
                         <td>UK</td>
+                        <td>0.00</td>
+                        <td>01-01-2017</td>
                     </tr>
                     <tr>
                         <td>Laughing Bacchus Winecellars</td>
                         <td>Yoshi Tannamuri</td>
                         <td>Canada</td>
+                        <td>0.00</td>
+                        <td>01-01-2017</td>
                     </tr>
                     <tr>
                         <td>Magazzini Alimentari Riuniti</td>
                         <td>Giovanni Rovelli</td>
                         <td>Italy</td>
+                        <td>0.00</td>
+                        <td>01-01-2017</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </body>
+    <script src="./app/product.js"></script>
+    <script src="./app/app.js" defer></script>
 </html>

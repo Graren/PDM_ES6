@@ -11,9 +11,12 @@ containerAll{
 }
 
 nav {
-    background-color: #424242;
+    background-color: #1976D2;
     padding: 10px;
     flex:1;
+    -webkit-box-shadow: 0px 10px 12px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 12px -3px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 12px -3px rgba(0,0,0,0.75);
 }
 
 nav div {
@@ -33,6 +36,7 @@ nav div p {
 }
 
 table {
+    margin-top: 2.5%;
     font-family: 'Roboto', sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -42,13 +46,14 @@ td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    white-space: nowrap;
 }
 
 tr:nth-child(even) {
     background-color: #dddddd;
 }
 tr:nth-child(odd){
-    background-color: #EEEEEE;
+    background-color: #FAFAFA;
 }
 
 .containerBody{
@@ -56,6 +61,80 @@ tr:nth-child(odd){
     flex-flow: column wrap;
     margin: 5%;
     border-radius: 4px;
-    background-color: #E3F2FD;
-    padding: 5%;
+    background-color: #90CAF9;
+    padding: 2.5%;
+}
+
+.add{
+    padding: 3% 0;
+    background-color: #FAFAFA;
+    border-radius: 4px;
+    flex-flow: row wrap;
+    display: flex;
+    flex:1;
+}
+
+.add div{
+    flex:1;
+    display: inline-block;
+    margin: 0 2.5%;
+}
+
+.add div > * {
+    flex:1;
+}
+
+.add div:last-child{
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+.add div:last-child button{
+    max-width:150px;
+    min-width:150px;
+}
+
+.add div input{
+    max-width:150px;
+}
+
+.tableContainer{
+    flex:1;
+    overflow-x:auto
+}
+
+@media (max-width: 480px) {
+    nav div {
+        flex:1;
+        width:100%;
+        margin: 0 auto;
+        margin-left: 0;
+        align-content: center;
+        justify-content: center
+    }
+}
+
+@media  (max-width: 768px ) and (min-width: 481px) {
+
+}
+
+@media  (max-width: 1280px ) and (min-width: 769px) {
+    .add div{
+        flex:1;
+        display: inline-block;
+        margin: 0 5%;
+    }
+    .add {
+        padding: 1%;
+    }
+}
+
+@media  (min-width: 1281px) {
+    .add div:last-child{
+        text-align: center;
+        align-items: center;
+        display: flex;
+        margin-top: 2.5%;
+    }
 }
