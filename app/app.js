@@ -40,6 +40,9 @@ const state = {
 //STATE END
 
 //STARTUP
+/*
+    Inicializacion de la app, coloca el minimo id insertable en produtos+1,
+*/
 const init = () =>{
     let { products } = state
     state.input.id = products.length + 1
@@ -56,6 +59,8 @@ const init = () =>{
 //STARTUP END
 
 //UTILITY METHODS
+
+//Convertir fecha de hoy en un string de formato YYYY-MM-DD
 const setInputDate = () => {
     let d = new Date(),
         month = '' + (d.getMonth() + 1),
@@ -67,6 +72,7 @@ const setInputDate = () => {
     return [year, month, day].join('-');
 }
 
+//Wrapper para construir la tabla a partir de los productos
 const render = () => {
     const { products } = state
     products.forEach( e => {
@@ -74,11 +80,13 @@ const render = () => {
     })
 }
 
+//Desconstruccion de un producto en un arreglo de sus llaves
 const productToArray = (product)=>{
     const { id, name, provider, price, date } = product
     return [id, name, provider, price, date]
 } 
 
+//Agregar una fila de de un producto a la tabla
 const addProduct= (product) => {
     const rowCount = table.rows.length
     let templateRow = table.rows[0]
@@ -89,6 +97,7 @@ const addProduct= (product) => {
     }
 }
 
+//Ordenar de manera ascendente productos
 const orderByAscending = (order) => {
     switch(order){
         case 'id':
@@ -96,6 +105,7 @@ const orderByAscending = (order) => {
                  return a.id - b.id
             })
             break
+
         case 'name':
              state.products.sort( (a, b) => {
                  if (a.name < b.name)
@@ -104,7 +114,8 @@ const orderByAscending = (order) => {
                     return 1
                  return 0
              })
-             break;
+             break
+
         case 'provider':
              state.products.sort( (a, b) => {
                  if (a.provider < b.provider)
@@ -113,7 +124,8 @@ const orderByAscending = (order) => {
                     return 1
                  return 0
              })
-             break;
+             break
+
         case 'price':
             state.products.sort( (a, b) => {
                  return a.price - b.price
@@ -128,14 +140,17 @@ const orderByAscending = (order) => {
                  return 0
             })
             break
+
         default :
             state.products.sort( (a, b) => {
                     return a.id - b.id
                 })
             break
+
     }
 }
 
+//ordenar de manera descendente productos
 const orderByDescending = (order) => {
     switch(order){
         case 'id':
@@ -151,7 +166,8 @@ const orderByDescending = (order) => {
                     return 1
                  return 0
              })
-             break;
+             break
+
         case 'provider':
              state.products.sort( (a, b) => {
                  if (a.provider > b.provider)
@@ -160,12 +176,14 @@ const orderByDescending = (order) => {
                     return 1
                  return 0
              })
-             break;
+             break
+
         case 'price':
             state.products.sort( (a, b) => {
                  return b.price - a.price
             })
             break
+
         case 'date':
             state.products.sort( (a, b) => {
                 if (a.date > b.date)
@@ -175,19 +193,23 @@ const orderByDescending = (order) => {
                  return 0
             })
             break
+            
         default :
             state.products.sort( (a, b) => {
                     return b.id - a.id
                 })
             break
+
     }
 }
 
+//Wrapper de ordenamiento y destruccion de la tabla
 const orderBy = (orderParam,order) => {
     order === 'ascending' ? orderByAscending(orderParam) : orderByDescending(orderParam)
     clearTable()
 }
 
+//Borra todas las filas de la tabla menos la primera, los headers
 const clearTable = () =>{
     const rowCount = table.rows.length
     for( let i = rowCount - 1; i > 0 ; i--){
