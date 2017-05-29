@@ -18,11 +18,14 @@ const checkBox = {
     date: document.querySelector('#dateCheck')
 }
 
+const selector = document.querySelector('#order');
+
 const table= document.querySelector("#table");
 
 const state = {
     products: window.localStorage.products && JSON.parse(window.localStorage.products) || [],
     orderBy: 'id',
+    order: selector.value,
     input: {
         id: 0,
         name :'',
@@ -61,10 +64,12 @@ addButton.onclick = e => {
     )
     state.input.id++
     input.id.value++
+    input.id.min++
     state.products.push(product.values)
     addProduct(productToArray(product.values))
     window.localStorage.products = JSON.stringify(state.products)
-    
+    orderBy(state.orderBy)
+    render()
 }
 
 const init = () =>{
@@ -72,9 +77,11 @@ const init = () =>{
     state.input.id = products.length + 1
     input.id.min = state.input.id
     input.id.value= state.input.id
+    input.id.min = state.input.id
     input.date.value = setInputDate()
     state.input.date = input.date.value
     checkBox.id.checked = true
+    console.log(selector.value)
     orderBy(state.orderBy)
     render()
 }
@@ -167,4 +174,10 @@ const clearTable = () =>{
     }
 }
 
+const onSelectorChange = (e) =>{
+    state.order = selector.value
+    console.log(state.order)
+}
+
 init()
+selector.onchange = onSelectorChange
