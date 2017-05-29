@@ -116,8 +116,12 @@ tr:nth-child(odd){
 }
 
 @media  (max-width: 768px ) and (min-width: 481px) {
-
-}
+    .add div:last-child button{
+        max-width:150px;
+        min-width:150px;
+        align-self: flex-end;
+    }
+}   
 
 @media  (max-width: 1280px ) and (min-width: 769px) {
     .add div{
