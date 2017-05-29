@@ -1,5 +1,6 @@
 //import Product from './app/product.js
 
+//HTML Selectors
 const addButton = document.querySelector('#addButton')
 
 const input = {
@@ -21,7 +22,9 @@ const checkBox = {
 const selector = document.querySelector('#order');
 
 const table= document.querySelector("#table");
+// HTML SELECTORS END
 
+//STATE
 const state = {
     products: window.localStorage.products && JSON.parse(window.localStorage.products) || [],
     orderBy: 'id',
@@ -34,44 +37,9 @@ const state = {
         date: new Date()
     }
 }
+//STATE END
 
-Object.values(input).forEach( element =>{
-    element.onchange = (e) => {
-        state.input[e.target.name] = e.target.value
-    }
-});
-
-Object.values(checkBox).forEach( element => {
-    element.onclick = (e) =>{
-        state.orderBy = e.target.name
-        Object.values(checkBox).forEach( el => {
-            if (e.target.name !== el.name){
-                el.checked = false;
-            }
-        })
-        orderBy(state.orderBy)
-        render()
-    }
-})
-
-addButton.onclick = e => {
-    let product = new Product(
-        state.input.id,
-        state.input.name,
-        state.input.provider,
-        state.input.price,
-        state.input.date
-    )
-    state.input.id++
-    input.id.value++
-    input.id.min++
-    state.products.push(product.values)
-    addProduct(productToArray(product.values))
-    window.localStorage.products = JSON.stringify(state.products)
-    orderBy(state.orderBy)
-    render()
-}
-
+//STARTUP
 const init = () =>{
     let { products } = state
     state.input.id = products.length + 1
@@ -81,11 +49,13 @@ const init = () =>{
     input.date.value = setInputDate()
     state.input.date = input.date.value
     checkBox.id.checked = true
-    console.log(selector.value)
-    orderBy(state.orderBy)
+    state.order = selector.value
+    orderBy(state.orderBy,state.order)
     render()
 }
+//STARTUP END
 
+//UTILITY METHODS
 const setInputDate = () => {
     let d = new Date(),
         month = '' + (d.getMonth() + 1),
@@ -119,7 +89,7 @@ const addProduct= (product) => {
     }
 }
 
-const orderBy = (order) => {
+const orderByAscending = (order) => {
     switch(order){
         case 'id':
             state.products.sort( (a, b) => {
@@ -164,6 +134,57 @@ const orderBy = (order) => {
                 })
             break
     }
+}
+
+const orderByDescending = (order) => {
+    switch(order){
+        case 'id':
+            state.products.sort( (a, b) => {
+                 return b.id - a.id
+            })
+            break
+        case 'name':
+             state.products.sort( (a, b) => {
+                 if (a.name > b.name)
+                    return -1
+                 if (a.name < b.name)
+                    return 1
+                 return 0
+             })
+             break;
+        case 'provider':
+             state.products.sort( (a, b) => {
+                 if (a.provider > b.provider)
+                    return -1
+                 if (a.provider < b.provider)
+                    return 1
+                 return 0
+             })
+             break;
+        case 'price':
+            state.products.sort( (a, b) => {
+                 return b.price - a.price
+            })
+            break
+        case 'date':
+            state.products.sort( (a, b) => {
+                if (a.date > b.date)
+                    return -1
+                 if (a.date < b.date)
+                    return 1
+                 return 0
+            })
+            break
+        default :
+            state.products.sort( (a, b) => {
+                    return b.id - a.id
+                })
+            break
+    }
+}
+
+const orderBy = (orderParam,order) => {
+    order === 'ascending' ? orderByAscending(orderParam) : orderByDescending(orderParam)
     clearTable()
 }
 
@@ -173,11 +194,55 @@ const clearTable = () =>{
         table.deleteRow(i)
     }
 }
+//UTILITY METHODS END
 
+//EVENT HANDLERS
 const onSelectorChange = (e) =>{
     state.order = selector.value
-    console.log(state.order)
+    orderBy(state.orderBy,state.order)
+    render()
 }
-
-init()
 selector.onchange = onSelectorChange
+
+Object.values(input).forEach( element =>{
+    element.onchange = (e) => {
+        state.input[e.target.name] = e.target.value
+    }
+});
+
+Object.values(checkBox).forEach( element => {
+    element.onclick = (e) =>{
+        e.target.checked = true
+        state.orderBy = e.target.name
+        Object.values(checkBox).forEach( el => {
+            if (e.target.name !== el.name){
+                el.checked = false;
+            }
+        })
+        orderBy(state.orderBy,state.order)
+        render()
+    }
+})
+
+addButton.onclick = e => {
+    let product = new Product(
+        state.input.id,
+        state.input.name,
+        state.input.provider,
+        state.input.price,
+        state.input.date
+    )
+    state.input.id++
+    input.id.value++
+    input.id.min++
+    state.products.push(product.values)
+    addProduct(productToArray(product.values))
+    window.localStorage.products = JSON.stringify(state.products)
+    orderBy(state.orderBy,state.order)
+    render()
+}
+//EVENT HANDLERS END
+
+//INITIALIZATION
+init()
+

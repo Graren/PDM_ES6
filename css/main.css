@@ -3,6 +3,37 @@ body{
     margin: 0 ;
 }
 
+p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    
+}
+
+.footer {
+    flex:1;
+    background-color: #212121;
+    padding: 2%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-shadow: -1px -3px 22px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px -3px 22px 1px rgba(0,0,0,0.75);
+    box-shadow: -1px -3px 22px 1px rgba(0,0,0,0.75);
+}
+
+.footer div {
+    flex:1;
+}
+
+.footer div p {
+    flex:1;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: #EEEEEE;
+    text-align: center
+}
+
 containerAll{
     flex:1;
     flex-direction: column;
@@ -36,7 +67,6 @@ nav div p {
 }
 
 table {
-    margin-top: 2.5%;
     font-family: 'Roboto', sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -61,8 +91,11 @@ tr:nth-child(odd){
     flex-flow: column wrap;
     margin: 5%;
     border-radius: 4px;
-    background-color: #90CAF9;
+    background-color: #CFD8DC;
     padding: 2.5%;
+    -webkit-box-shadow: -5px 10px 22px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: -5px 10px 22px 1px rgba(0,0,0,0.75);
+    box-shadow: -5px 10px 22px 1px rgba(0,0,0,0.75);
 }
 
 .add{
@@ -72,6 +105,7 @@ tr:nth-child(odd){
     flex-flow: row wrap;
     display: flex;
     flex:1;
+    border: 1px solid #212121;
 }
 
 .add div{
@@ -97,11 +131,26 @@ tr:nth-child(odd){
 
 .add div input{
     max-width:150px;
+    width:150px;
 }
 
 .tableContainer{
     flex:1;
-    overflow-x:auto
+    overflow-x:auto;
+    border-radius: 4px;
+    margin-top: 2.5%;
+    border: 1px solid #212121
+}
+
+.selectorContainer{
+    margin-top: 2.5%;
+    padding: 2%;
+    background-color: #FAFAFA;
+    flex:1;
+    display: inline-flex;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid #212121
 }
 
 @media (max-width: 480px) {
@@ -112,6 +161,13 @@ tr:nth-child(odd){
         margin-left: 0;
         align-content: center;
         justify-content: center
+    }
+
+    .add div:last-child button{
+        max-width:150px;
+        min-width:150px;
+        align-self: flex-end;
+        margin-top: 4%;
     }
 }
 
@@ -131,6 +187,12 @@ tr:nth-child(odd){
     }
     .add {
         padding: 1%;
+    }
+
+    .add div:last-child button{
+        max-width:150px;
+        min-width:150px;
+        align-self: flex-end;
     }
 }
 
