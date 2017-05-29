@@ -1,8 +1,5 @@
 //import Product from './app/product.js
 
-const p = new Product(1,"name","prov",0.00,new Date('01-04-2017'))
-const { id } = p.values
-
 const addButton = document.querySelector('#addButton')
 
 const input = {
@@ -41,12 +38,18 @@ Object.values(input).forEach( element =>{
     }
 });
 
-console.group('state')
-console.log(state)
-console.groupEnd()
-console.group('localStorage')
-console.log(window.localStorage)
-console.groupEnd
+Object.values(checkBox).forEach( element => {
+    element.onclick = (e) =>{
+        state.orderBy = e.target.name
+        Object.values(checkBox).forEach( el => {
+            if (e.target.name !== el.name){
+                el.checked = false;
+            }
+        })
+        orderBy(state.orderBy)
+        render()
+    }
+})
 
 addButton.onclick = e => {
     let product = new Product(
@@ -54,9 +57,12 @@ addButton.onclick = e => {
         state.input.name,
         state.input.provider,
         state.input.price,
-        state.input.Date
+        state.input.date
     )
+    state.input.id++
+    input.id.value++
     state.products.push(product.values)
+    addProduct(productToArray(product.values))
     window.localStorage.products = JSON.stringify(state.products)
     
 }
@@ -67,6 +73,9 @@ const init = () =>{
     input.id.min = state.input.id
     input.id.value= state.input.id
     input.date.value = setInputDate()
+    state.input.date = input.date.value
+    checkBox.id.checked = true
+    orderBy(state.orderBy)
     render()
 }
 
@@ -82,21 +91,80 @@ const setInputDate = () => {
 }
 
 const render = () => {
-    const rowCount = table.rows.length
-    let templateRow = table.rows[0]
     const { products } = state
     products.forEach( e => {
-        console.log(e)
-        const { id, name, provider, price, date } = e
-        const arr = [id, name, provider, price, date]
-        let row = table.insertRow()
-        for( ind = 0 ; ind < templateRow.cells.length ; ind++){
-            let cell = row.insertCell()
-            cell.textContent = `${arr[ind]}`;
-        }
-
+        addProduct(productToArray(e))
     })
-    
+}
+
+const productToArray = (product)=>{
+    const { id, name, provider, price, date } = product
+    return [id, name, provider, price, date]
+} 
+
+const addProduct= (product) => {
+    const rowCount = table.rows.length
+    let templateRow = table.rows[0]
+    let row = table.insertRow()
+    for( ind = 0 ; ind < templateRow.cells.length ; ind++){
+        let cell = row.insertCell()
+        cell.textContent = `${product[ind]}`;
+    }
+}
+
+const orderBy = (order) => {
+    switch(order){
+        case 'id':
+            state.products.sort( (a, b) => {
+                 return a.id - b.id
+            })
+            break
+        case 'name':
+             state.products.sort( (a, b) => {
+                 if (a.name < b.name)
+                    return -1
+                 if (a.name > b.name)
+                    return 1
+                 return 0
+             })
+             break;
+        case 'provider':
+             state.products.sort( (a, b) => {
+                 if (a.provider < b.provider)
+                    return -1
+                 if (a.provider > b.provider)
+                    return 1
+                 return 0
+             })
+             break;
+        case 'price':
+            state.products.sort( (a, b) => {
+                 return a.price - b.price
+            })
+            break
+        case 'date':
+            state.products.sort( (a, b) => {
+                if (a.date < b.date)
+                    return -1
+                 if (a.date > b.date)
+                    return 1
+                 return 0
+            })
+            break
+        default :
+            state.products.sort( (a, b) => {
+                    return a.id - b.id
+                })
+            break
+    }
+    clearTable()
+}
+
+const clearTable = () =>{
+    const rowCount = table.rows.length
+    for( let i = rowCount - 1; i > 0 ; i--){
+        table.deleteRow(i)
+    }
 }
 
 init()
