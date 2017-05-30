@@ -21,4 +21,5 @@ class Product {
 
 }
 
+//Algun dia implementaran esto
 //export default Product

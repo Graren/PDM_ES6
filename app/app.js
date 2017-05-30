@@ -1,4 +1,5 @@
 //import Product from './app/product.js
+//Cuando implementen esto en los exploradores funcionara 
 
 //HTML Selectors
 const addButton = document.querySelector('#addButton')
