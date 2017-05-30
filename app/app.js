@@ -4,7 +4,6 @@
 const addButton = document.querySelector('#addButton')
 
 const input = {
-    id: document.querySelector('#idInput'),
     name: document.querySelector('#nameInput'),
     provider: document.querySelector('#providerInput'),
     price: document.querySelector('#priceInput'),
@@ -41,14 +40,13 @@ const state = {
 
 //STARTUP
 /*
-    Inicializacion de la app, coloca el minimo id insertable en produtos+1,
+    Inicializacion de la app, coloca el minimo id insertable en produtos+1, coloca el input date en la fecha de hoy
+    coloca por default el checkbox de id, ordena de acuerdo a lo que se encuentre en el selector y renderiza la tabla
+    inicial
 */
 const init = () =>{
     let { products } = state
     state.input.id = products.length + 1
-    input.id.min = state.input.id
-    input.id.value= state.input.id
-    input.id.min = state.input.id
     input.date.value = setInputDate()
     state.input.date = input.date.value
     checkBox.id.checked = true
@@ -255,8 +253,6 @@ addButton.onclick = e => {
         state.input.date
     )
     state.input.id++
-    input.id.value++
-    input.id.min++
     state.products.push(product.values)
     addProduct(productToArray(product.values))
     window.localStorage.products = JSON.stringify(state.products)
